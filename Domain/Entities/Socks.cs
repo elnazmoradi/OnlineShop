@@ -14,6 +14,7 @@ namespace Domain.Entities
         public double Price { get; set; }
         public Enums.Size SocksSize { get; set; }
         public Enums.Color SocksColor { get; set; }
+
     }
 
 
