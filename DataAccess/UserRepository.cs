@@ -43,7 +43,8 @@ namespace DataAccess
             using (SqlConnection connection = DbContext.Connection())
             {
                 connection.Open();
-                string query = $@"INSERT INTO Account(FirstName,
+                string query = $@"INSERT INTO Account(Id,
+                                            FirstName,
                                            LastName,
                                            PhoneNumber,
                                            Address,
@@ -51,6 +52,7 @@ namespace DataAccess
                                            Password,
                                            Balance) 
                                     VALUES(
+                                            '{user.Id}',
                                             '{user.FirstName}',
                                             '{user.LastName}',
                                             '{user.PhoneNumber}',
