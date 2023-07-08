@@ -12,7 +12,7 @@ namespace Domain.Contracts
         public int AddOrder(Order order);
         public int UpdateOrder(Order order);
         public int DeleteOrder(int id);
-        public List<Order> GetOrdersByCartID();
+        public List<Order> GetOrdersByCartID(string cartID);
     }
 }
 
