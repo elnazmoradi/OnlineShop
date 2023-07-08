@@ -12,20 +12,17 @@ namespace DataAccess
       using (SqlConnection connection = DbContext.Connection())
       {
         connection.Open();
-        string query = $@"INSERT INTO Account(
-                                           Id,
-                                           FirstName,
+        string query = $@"INSERT INTO Account(FirstName,
                                            LastName,
                                            PhoneNumber,
-                                           Address,
+                                           Email,
                                            UserName,
                                            Password) 
                                     VALUES(
-                                            '{user.Id}',
                                             '{user.FirstName}',
                                             '{user.LastName}',
                                             '{user.PhoneNumber}',
-                                            '{user.Address}',
+                                            '{user.Email}',
                                             '{user.UserName}',
                                             HASHBYTES('SHA2_256','{user.Password}')  
                                             )";

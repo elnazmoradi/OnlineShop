@@ -1,7 +1,7 @@
 ﻿Welcome,Welcome to our shop.
 InvalidFirstName,Entry first name is invalid!
 InvalidLastName,Entry last name is invalid!
-InvalidAddress,Entry Address is invalid!
+InvalidEmail,Entry Email is invalid!
 InvalidPhoneNumber,Entry phone number is invalid!
 InvalidAddress,Entry address is invalid!
 InvalidUsername,Entry username is invalid!
