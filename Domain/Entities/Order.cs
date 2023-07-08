@@ -8,9 +8,9 @@ namespace Domain.Entities
 {
     public class Order
     {
-        public int ID { get; set; }
-        public int SocksID { get; set; }
-        public int CartID { get; set; }
+        public Guid ID { get; set; }
+        public Guid SocksID { get; set; }
+        public Guid CartID { get; set; }
         public int SocksNumber { get; set; }
         public double OrderPrice { get; set; }
     }

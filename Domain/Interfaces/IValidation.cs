@@ -3,7 +3,7 @@
   public interface IValidation
   {
     bool NameValidation(string name);
-    bool EmailValidation(string email);
+    bool AddressValidation(string address);
     bool PhoneNumberValidation(string phoneNumber);
     bool PasswordValidation(string password);
     bool UsernameValidation(string username);

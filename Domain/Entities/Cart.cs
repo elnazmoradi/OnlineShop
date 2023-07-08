@@ -9,8 +9,8 @@ namespace Domain.Entities
 {
     public class Cart
     {
-        public int ID { get; set; }
-        public int AccountID { get; set; }
+        public Guid ID { get; set; }
+        public Guid AccountID { get; set; }
         public double TotalPrice { get; set; }
 
     }
