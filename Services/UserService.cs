@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 
 namespace Service
@@ -15,26 +16,26 @@ namespace Service
     public string InsertUserInfo(User user)
     {
       if (!validation.NameValidation(user.FirstName))
-        return "Invalid First Name";
+        return new ErrorMessages().ShowMessages(Errors.InvalidFirstName);
 
       if (!validation.NameValidation(user.LastName))
-        return "Invalid Last Name";
+        return new ErrorMessages().ShowMessages(Errors.InvalidLastName);
 
       if (!validation.EmailValidation(user.Email))
-        return "Invalid Email Address";
+        return new ErrorMessages().ShowMessages(Errors.InvalidEmail);
 
       if (!validation.PhoneNumberValidation(user.PhoneNumber))
-        return "Invalid Phone Number";
+        return new ErrorMessages().ShowMessages(Errors.InvalidPhoneNumber);
 
       if (!validation.UsernameValidation(user.UserName))
-        return "Invalid UserName";
+        return new ErrorMessages().ShowMessages(Errors.InvalidUsername);
 
       if (!validation.PasswordValidation(user.Password))
-        return "Invalid Password";
-      
+        return new ErrorMessages().ShowMessages(Errors.InvalidPassword);
+
       userRepository.InsertUserInfo(user);
 
-      return "Registered";
+      return new ErrorMessages().ShowMessages(Errors.Welcome);
     }
   }
 }
