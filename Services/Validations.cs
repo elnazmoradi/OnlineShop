@@ -5,6 +5,11 @@ namespace Service
 {
   public class Validation : IValidation
   {
+    private readonly IUserRepository userRepository;
+    public Validation(IUserRepository userRepository)
+    {
+      this.userRepository = userRepository;
+    }
     public bool NameValidation(string name)
     {
       Regex regex = new Regex("^[a-zA-Z]+$");
@@ -30,5 +35,8 @@ namespace Service
       Regex regex = new Regex("^[a-zA-Z0-9]+$");
       return regex.IsMatch(username);
     }
+    public bool UsernameExistanceValidation(string username) 
+      => userRepository.UsernameExistanceValidation(username);
+
   }
 }

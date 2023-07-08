@@ -43,8 +43,9 @@ namespace DataAccess
             using (SqlConnection connection = DbContext.Connection())
             {
                 connection.Open();
-                string query = $@"INSERT INTO Account(Id,
-                                            FirstName,
+                string query = $@"INSERT INTO Account(
+                                           Id,
+                                           FirstName,
                                            LastName,
                                            PhoneNumber,
                                            Address,
@@ -56,7 +57,7 @@ namespace DataAccess
                                             '{user.FirstName}',
                                             '{user.LastName}',
                                             '{user.PhoneNumber}',
-                                            '{user.Email}',
+                                            '{user.Address}',
                                             '{user.UserName}',
                                             HASHBYTES('SHA2_256','{user.Password}'),
                                             '{user.Balance}'
@@ -64,6 +65,16 @@ namespace DataAccess
 
 
         connection.Query(query);
+      }
+    }
+    public bool UsernameExistanceValidation(string username)
+    {
+      using (SqlConnection connection = DbContext.Connection())
+      {
+        connection.Open();
+        string query = $@"SELECT * FROM Account WHERE Username = '{username}'";
+        return connection.ExecuteReader(query).FieldCount > 0;
+        connection.Close();
       }
     }
   }

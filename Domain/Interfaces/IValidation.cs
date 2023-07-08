@@ -7,6 +7,6 @@
     bool PhoneNumberValidation(string phoneNumber);
     bool PasswordValidation(string password);
     bool UsernameValidation(string username);
-    //TODO: Username Existance Validation 
+    bool UsernameExistanceValidation(string username); 
   }
 }
