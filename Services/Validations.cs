@@ -10,9 +10,9 @@ namespace Service
       Regex regex = new Regex("^[a-zA-Z]+$");
       return regex.IsMatch(name);
     }
-    public bool EmailValidation(string email)
+    public bool AddressValidation(string email)
     {
-      Regex regex = new Regex("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+      Regex regex = new Regex("^[a-zA-Z0-9\\s]+$");
       return regex.IsMatch(email);
     }
     public bool PhoneNumberValidation(string phoneNumber)
