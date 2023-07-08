@@ -22,7 +22,7 @@ namespace DataAccess
             }
         }
 
-        public void DeleteSocksByID(int ID)
+        public void DeleteSocksByID(Guid ID)
         {
             using (SqlConnection connection = DbContext.Connection())
             {
@@ -44,7 +44,7 @@ namespace DataAccess
                 {
                     Socks socks = new Socks()
                     {
-                        ID = (int)reader.GetValue(0),
+                        ID = (Guid)reader.GetValue(0),
                         Title = reader.GetValue(1).ToString(),
                         Description = reader.GetValue(2).ToString(),
                         Price = (double)reader.GetValue(3),
@@ -58,7 +58,7 @@ namespace DataAccess
             }
         }
 
-        public Socks GetSocksByID(int ID)
+        public Socks GetSocksByID(Guid ID)
         {
             using (SqlConnection connection = DbContext.Connection())
             {
@@ -67,7 +67,7 @@ namespace DataAccess
                 var reader = cmd.ExecuteReader();
                 Socks socks = new Socks()
                 {
-                    ID = (int)reader.GetValue(0),
+                    ID = (Guid)reader.GetValue(0),
                     Title = reader.GetValue(1).ToString(),
                     Description = reader.GetValue(2).ToString(),
                     Price = (double)reader.GetValue(3),
@@ -78,7 +78,7 @@ namespace DataAccess
             }
         }
 
-        public void UpdateSocksByID(int ID)
+        public void UpdateSocksByID(Guid ID)
         {
             // i don't think it is functional.
         }

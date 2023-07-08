@@ -21,8 +21,8 @@ namespace Service
       if (!validation.NameValidation(user.LastName))
         return new ErrorMessages().ShowMessages(Errors.InvalidLastName);
 
-      if (!validation.EmailValidation(user.Email))
-        return new ErrorMessages().ShowMessages(Errors.InvalidEmail);
+      if (!validation.AddressValidation(user.Address))
+        return new ErrorMessages().ShowMessages(Errors.InvalidAddress);
 
       if (!validation.PhoneNumberValidation(user.PhoneNumber))
         return new ErrorMessages().ShowMessages(Errors.InvalidPhoneNumber);
@@ -30,9 +30,13 @@ namespace Service
       if (!validation.UsernameValidation(user.UserName))
         return new ErrorMessages().ShowMessages(Errors.InvalidUsername);
 
+      if (validation.UsernameExistanceValidation(user.UserName))
+        return new ErrorMessages().ShowMessages(Errors.RepeatedUsername);
+
       if (!validation.PasswordValidation(user.Password))
         return new ErrorMessages().ShowMessages(Errors.InvalidPassword);
 
+      user.Id = Guid.NewGuid();
       userRepository.InsertUserInfo(user);
 
       return new ErrorMessages().ShowMessages(Errors.Welcome);

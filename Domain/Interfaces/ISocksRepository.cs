@@ -10,9 +10,9 @@ namespace Domain.Contracts
     public interface ISocksRepository
     {
         void CreateSocks(Socks TheSocks);
-        Socks GetSocksByID(int ID);
+        Socks GetSocksByID(Guid ID);
         List<Socks> GetAllSocks();
-        void UpdateSocksByID(int ID);
-        void DeleteSocksByID(int ID);
+        void UpdateSocksByID(Guid ID);
+        void DeleteSocksByID(Guid ID);
     }
 }
