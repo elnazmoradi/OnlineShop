@@ -7,7 +7,7 @@ namespace DataAccess
 {
     public class UserRepository : IUserRepository
     {
-        public User getUserByUsername(string username)
+        public User getUserByUsernameAndPassword(string username, string password)
         {
 
             User? user = null;
@@ -16,20 +16,14 @@ namespace DataAccess
             using (connection)
             {
                 connection.Open();
-                SqlCommand sqlCommand = new("select * from Users where UserName = @UserName", connection);
-                SqlParameter sqlParameter = new()
-                {
-                    ParameterName = "UserName",
-                    Value = user.UserName
-                };
-                sqlCommand.Parameters.Add(sqlParameter);
+                SqlCommand sqlCommand = new($@"SELECT * FROM Account where Username = '{username}' AND Password = HASHBYTES('SHA2_256','{password}')", connection);
 
                 using (SqlDataReader reader = sqlCommand.ExecuteReader())
                 {
                     if (reader.Read())
                     {
                         user = new(id: reader.GetGuid(0), firstName: reader.GetString(1), lastName: reader.GetString(2).Trim(), phoneNumber: reader.GetString(3).Trim(),
-                    address: reader.GetString(3), userName: reader.GetString(4).Trim(), password: reader.GetString(5), balance: reader.GetDecimal(6));
+                    address: reader.GetString(4), userName: reader.GetString(5).Trim(), balance: reader.GetDecimal(7));
                     }
 
                     return user ?? null;
