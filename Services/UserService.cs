@@ -21,7 +21,7 @@ namespace Service
       if (!validation.NameValidation(user.LastName))
         return new ErrorMessages().ShowMessages(Errors.InvalidLastName);
 
-      if (!validation.EmailValidation(user.Email))
+      if (!validation.EmailValidation(user.Address))
         return new ErrorMessages().ShowMessages(Errors.InvalidEmail);
 
       if (!validation.PhoneNumberValidation(user.PhoneNumber))
