@@ -56,13 +56,15 @@ namespace DataAccess
                                             '{user.FirstName}',
                                             '{user.LastName}',
                                             '{user.PhoneNumber}',
-                                            '{user.Address}',
+                                            '{user.Email}',
                                             '{user.UserName}',
                                             HASHBYTES('SHA2_256','{user.Password}'),
                                             '{user.Balance}'
                                             )";
-                connection.Query(query);
-            }
-        }
+
+
+        connection.Query(query);
+      }
     }
+  }
 }

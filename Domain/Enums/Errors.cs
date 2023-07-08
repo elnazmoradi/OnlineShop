@@ -5,6 +5,7 @@
     Welcome,
     InvalidFirstName,
     InvalidLastName,
+    InvalidEmail,
     InvalidPhoneNumber,
     InvalidAddress,
     InvalidUsername,
