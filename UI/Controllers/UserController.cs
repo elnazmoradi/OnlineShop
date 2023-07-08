@@ -21,5 +21,17 @@ namespace UI.Controllers
       var result = userService.InsertUserInfo(user);
       return Ok(result);
     }
-  }
+        [HttpGet]
+        [ActionName("LogIn")]
+        [Route("/LogIn")]
+        public IActionResult LogIn(string username, string password)
+        {
+            var result = userService.Login(username,password);
+            if(result.IsSuccessfull)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+    }
 }
