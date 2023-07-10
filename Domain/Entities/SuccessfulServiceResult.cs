@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class SuccessfulServiceResult <T> : ServiceResult<T> 
+    public class SuccessfulServiceResult <T> : ServiceResult<T>
+  {
+    public SuccessfulServiceResult(T result)
     {
-        public SuccessfulServiceResult(T result)
-        {
-            this.IsSuccessfull = true;
-            this.Result = result;
-        }
+      this.IsSuccessfull = true;
+      this.Result = result;
     }
+    public SuccessfulServiceResult()
+    {
+      this.IsSuccessfull = true;
+    }
+  }
 }

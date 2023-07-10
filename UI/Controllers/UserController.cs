@@ -16,10 +16,14 @@ namespace UI.Controllers
     [HttpPost]
     [ActionName("Register")]
     [Route("/Register")]
+    //[ProducesResponseType(200)]
+    //[ProducesResponseType(400)]
     public IActionResult Register(User user)
     {
       var result = userService.InsertUserInfo(user);
-      return Ok(result);
+      if(result.IsSuccessfull)
+        return Ok(result);
+      return BadRequest(result);
     }
         [HttpGet]
         [ActionName("LogIn")]
