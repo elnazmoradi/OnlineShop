@@ -13,7 +13,22 @@ namespace Service
       this.validation = validation;   
       this.userRepository = userRepository;
     }
-    public string InsertUserInfo(User user)
+        public ServiceResult<User> Login(string username, string password)
+        {
+            User user = userRepository.getUserByUsernameAndPassword(username,password);
+            try
+            {
+                //User user = userRepository.getUserByUsername(username);
+                if (user != null )
+                {
+                    return new SuccessfulServiceResult<User>(user);
+                }
+                    
+            }
+            catch (Exception) { }
+            return new ServiceResultError<User>("Username or password is wrong");
+        }
+        public string InsertUserInfo(User user)
     {
       if (!validation.NameValidation(user.FirstName))
         return new ErrorMessages().ShowMessages(Errors.InvalidFirstName);
@@ -21,15 +36,22 @@ namespace Service
       if (!validation.NameValidation(user.LastName))
         return new ErrorMessages().ShowMessages(Errors.InvalidLastName);
 
+      if (!validation.AddressValidation(user.Address))
+        return new ErrorMessages().ShowMessages(Errors.InvalidAddress);
+
       if (!validation.PhoneNumberValidation(user.PhoneNumber))
         return new ErrorMessages().ShowMessages(Errors.InvalidPhoneNumber);
 
       if (!validation.UsernameValidation(user.UserName))
         return new ErrorMessages().ShowMessages(Errors.InvalidUsername);
 
+      if (validation.UsernameExistanceValidation(user.UserName))
+        return new ErrorMessages().ShowMessages(Errors.RepeatedUsername);
+
       if (!validation.PasswordValidation(user.Password))
         return new ErrorMessages().ShowMessages(Errors.InvalidPassword);
 
+      user.Id = Guid.NewGuid();
       userRepository.InsertUserInfo(user);
 
       return new ErrorMessages().ShowMessages(Errors.Welcome);
