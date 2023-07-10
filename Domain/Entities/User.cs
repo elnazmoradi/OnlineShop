@@ -2,6 +2,8 @@
 {
     public class User
     {
+        public User()
+        {}
         public User(Guid id, string firstName, string lastName, string phoneNumber, string address, string userName, string password, decimal balance)
         {
             Id = id;

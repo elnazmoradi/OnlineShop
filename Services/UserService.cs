@@ -28,33 +28,33 @@ namespace Service
             catch (Exception) { }
             return new ServiceResultError<User>("Username or password is wrong");
         }
-        public string InsertUserInfo(User user)
-    {
-      if (!validation.NameValidation(user.FirstName))
-        return new ErrorMessages().ShowMessages(Errors.InvalidFirstName);
+        public ServiceResult<User> InsertUserInfo(User user)
+        {
+          if (!validation.NameValidation(user.FirstName))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidFirstName));
 
-      if (!validation.NameValidation(user.LastName))
-        return new ErrorMessages().ShowMessages(Errors.InvalidLastName);
+          if (!validation.NameValidation(user.LastName))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidLastName));
 
-      if (!validation.AddressValidation(user.Address))
-        return new ErrorMessages().ShowMessages(Errors.InvalidAddress);
+          if (!validation.AddressValidation(user.Address))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidAddress));
 
-      if (!validation.PhoneNumberValidation(user.PhoneNumber))
-        return new ErrorMessages().ShowMessages(Errors.InvalidPhoneNumber);
+          if (!validation.PhoneNumberValidation(user.PhoneNumber))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidPhoneNumber));
 
-      if (!validation.UsernameValidation(user.UserName))
-        return new ErrorMessages().ShowMessages(Errors.InvalidUsername);
+          if (!validation.UsernameValidation(user.UserName))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidUsername));
 
-      if (validation.UsernameExistanceValidation(user.UserName))
-        return new ErrorMessages().ShowMessages(Errors.RepeatedUsername);
+          if (!validation.UsernameExistanceValidation(user.UserName))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.RepeatedUsername));
 
-      if (!validation.PasswordValidation(user.Password))
-        return new ErrorMessages().ShowMessages(Errors.InvalidPassword);
+          if (!validation.PasswordValidation(user.Password))
+            return new ServiceResultError<User>(new ErrorMessages().ShowMessages(Errors.InvalidPassword));
 
-      user.Id = Guid.NewGuid();
-      userRepository.InsertUserInfo(user);
+          user.Id = Guid.NewGuid();
+          userRepository.InsertUserInfo(user);
 
-      return new ErrorMessages().ShowMessages(Errors.Welcome);
-    }
+          return new SuccessfulServiceResult<User>();
+        }
   }
 }
