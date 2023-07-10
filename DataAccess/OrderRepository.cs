@@ -57,9 +57,9 @@ namespace DataAccess
                     {
                         var order = new Order()
                         {
-                            ID = reader.GetInt32(0),
-                            SocksID = reader.GetInt32(1),
-                            CartID = reader.GetInt32(2),
+                            ID = reader.GetGuid(0),
+                            SocksID = reader.GetGuid(1),
+                            CartID = reader.GetGuid(2),
                             SocksNumber= reader.GetInt32(3),
                             OrderPrice = reader.GetDouble(4),
                         };

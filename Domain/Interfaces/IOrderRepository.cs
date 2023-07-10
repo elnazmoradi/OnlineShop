@@ -11,7 +11,7 @@ namespace Domain.Contracts
     {
         public int AddOrder(Order order);
         public int UpdateOrder(Order order);
-        public int DeleteOrder(string id);
+        public int DeleteOrder(string orderId);
         public List<Order> GetOrdersByCartID(string cartID);
     }
 }

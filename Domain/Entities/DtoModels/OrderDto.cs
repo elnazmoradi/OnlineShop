@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Domain.Entities.DtoModels
 {
-    public class Order
+    public class OrderDto
     {
-        public Guid ID { get; set; }
         public Guid SocksID { get; set; }
         public Guid CartID { get; set; }
         public int SocksNumber { get; set; }
-        public double OrderPrice { get; set; }
-        public Socks socks { get; set; }
     }
 }
