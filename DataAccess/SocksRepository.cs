@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,8 @@ namespace DataAccess
         {
             using (SqlConnection connection = DbContext.Connection())
             {
-                string command = $"INSERT INTO SOCKS (TITLE, DESCRIPTION, PRICE, SIZE, COLOR) values ('{TheSocks.Title}', '{TheSocks.Description}', '{TheSocks.Price}', '{TheSocks.SocksSize}', '{TheSocks.SocksColor}');";
+                connection.Open();
+                string command = $"INSERT INTO SOCKS (TITLE, DESCRIPTION, PRICE, SIZE, COLOR, IMAGE) values ('{TheSocks.Title}', '{TheSocks.Description}', '{TheSocks.Price}', '{TheSocks.SocksSize}', '{TheSocks.SocksColor}', {TheSocks.Image});";
                 using var cmd = new SqlCommand(command, connection);
                 var reader = cmd.ExecuteNonQuery();
             }
@@ -26,6 +28,7 @@ namespace DataAccess
         {
             using (SqlConnection connection = DbContext.Connection())
             {
+                connection.Open();
                 string command = $"DELETE FROM SOCKS WHERE Id = {ID};";
                 using var cmd = new SqlCommand(command, connection);
                 var reader = cmd.ExecuteNonQuery();
@@ -36,6 +39,7 @@ namespace DataAccess
         {
             using (SqlConnection connection = DbContext.Connection())
             {
+                connection.Open();
                 List<Socks> allSocks = new List<Socks>();
                 string command = $"SELECT * FROM SOCKS;";
                 using var cmd = new SqlCommand(command, connection);
@@ -49,7 +53,9 @@ namespace DataAccess
                         Description = reader.GetValue(2).ToString(),
                         Price = (double)reader.GetValue(3),
                         SocksSize = Enum.Parse<Size>(reader.GetValue(4).ToString()),
-                        SocksColor = Enum.Parse<Color>(reader.GetValue(5).ToString())
+                        SocksColor = Enum.Parse<Color>(reader.GetValue(5).ToString()),
+                        Image = (Blob)reader.GetValue(6)
+
                     };
                     allSocks.Add(socks);
                 }
@@ -62,6 +68,7 @@ namespace DataAccess
         {
             using (SqlConnection connection = DbContext.Connection())
             {
+                connection.Open();
                 string command = $"SELECT * FROM SOCKS where id = {ID};";
                 using var cmd = new SqlCommand(command, connection);
                 var reader = cmd.ExecuteReader();
@@ -72,7 +79,8 @@ namespace DataAccess
                     Description = reader.GetValue(2).ToString(),
                     Price = (double)reader.GetValue(3),
                     SocksSize = Enum.Parse<Size>(reader.GetValue(4).ToString()),
-                    SocksColor = Enum.Parse<Color>(reader.GetValue(5).ToString())
+                    SocksColor = Enum.Parse<Color>(reader.GetValue(5).ToString()),
+                    Image = (Blob)reader.GetValue(5)
                 };
                 return socks;
             }
