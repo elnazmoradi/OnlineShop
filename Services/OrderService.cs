@@ -62,5 +62,28 @@ namespace Service
             var orderList = _orderReository.GetOrdersByCartID(CartID);
             return new ServiceResult<List<Order>>() { Result = orderList};
         }
+
+        public ServiceResult<int> UpdateOrder(Order order)
+        {
+           var updatedOrder = new Order()
+           {
+               ID= order.ID,
+               CartID= order.CartID,
+               OrderPrice= order.OrderPrice,
+               SocksNumber = order.SocksNumber,
+               SocksID= order.SocksID,
+           };
+            var result = _orderReository.UpdateOrder(updatedOrder);
+            if (result > 0)
+            {
+                return new SuccessfulServiceResult<int>(result);
+
+            }
+            else
+            {
+                return new ServiceResultError<int>("Not Updated Successfully");
+            }
+
+        }
     }
 }

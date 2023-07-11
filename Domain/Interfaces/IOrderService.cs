@@ -13,5 +13,6 @@ namespace Domain.Interfaces
         public ServiceResult<int> AddToCart(OrderDto orderDto);
         public ServiceResult<int> DeleteFromCart(string orderID);
         public ServiceResult<List<Order>> GetOrders(string CartID);
+        public ServiceResult<int> UpdateOrder(Order order);
     }
 }

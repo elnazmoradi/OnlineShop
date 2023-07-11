@@ -1,4 +1,5 @@
 using DataAccess;
+using Domain.Contracts;
 using Domain.Interfaces;
 using Service;
 
@@ -13,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IValidation , Validation>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<ISocksRepository, SocksRepository>();
 
 var app = builder.Build();
 
